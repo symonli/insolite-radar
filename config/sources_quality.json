@@ -1,0 +1,46 @@
+{
+  "description": "Score signal/bruit par source. Mis à jour après chaque run. Sources trop bruyantes → on les retire ou on durcit le filtre.",
+  "last_updated": "2026-05-27",
+  "sources": {
+    "Paris Zigzag": {
+      "rating": "🔥",
+      "runs": 1,
+      "items_scraped": 15,
+      "retained": 1,
+      "ratio": 0.067,
+      "notes": "Rubrique 'insolite/secrets-metro' donne pile le bon signal. Le reste (restos, sport, sortir) = filtré."
+    },
+    "Le Monde — Sciences": {
+      "rating": "⚡",
+      "runs": 1,
+      "items_scraped": 15,
+      "retained": 1,
+      "ratio": 0.067,
+      "notes": "Beaucoup d'opinions/tribunes. Switcher vers /insolite/rss_full.xml si on trouve le bon URL (404 au setup)."
+    },
+    "Le Figaro — Sciences": {
+      "rating": "⚡",
+      "runs": 1,
+      "items_scraped": 15,
+      "retained": 1,
+      "ratio": 0.067,
+      "notes": "Bon ratio sur les découvertes. Filtrer les sujets actualité (canicule, Trump)."
+    },
+    "Slate": {
+      "rating": "⚡",
+      "runs": 1,
+      "items_scraped": 15,
+      "retained": 1,
+      "ratio": 0.067,
+      "notes": "Bon mix sciences + société + histoire. Filtrer critiques ciné/séries."
+    },
+    "20 Minutes — Insolite": {
+      "rating": "⚡",
+      "runs": 1,
+      "items_scraped": 15,
+      "retained": 1,
+      "ratio": 0.067,
+      "notes": "Beaucoup de fait divers léger. Trier sec, ne garder que les anecdotes durables."
+    }
+  }
+}

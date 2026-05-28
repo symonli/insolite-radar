@@ -1,0 +1,10 @@
+{
+  "description": "Sources lifestyle Paris pour anecdotes urbaines / culturelles. Élargir à d'autres villes en V2 (Lyon Capitale, Made in Marseille…). Time Out Paris et Enlarge your Paris à rebrancher en V2 (flux RSS HS au moment du setup).",
+  "sources": [
+    {
+      "name": "Paris Zigzag",
+      "type": "rss",
+      "feed_url": "https://www.pariszigzag.fr/feed"
+    }
+  ]
+}

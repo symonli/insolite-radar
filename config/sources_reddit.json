@@ -1,0 +1,25 @@
+{
+  "description": "Subreddits FR à scraper pour anecdotes habitat/logement/urbanisme. On prend le 'top' de la semaine — meilleur ratio signal qu'un 'hot' brut.",
+  "subreddits": [
+    "france",
+    "immobilier",
+    "paris",
+    "AskFrance",
+    "vosfinances"
+  ],
+  "sort": "top",
+  "timeframe": "week",
+  "limit": 20,
+  "filter_keywords_must_have_one": [
+    "logement", "appartement", "appart", "studio", "maison", "immeuble", "copropriété", "copropriete", "coproprio",
+    "loyer", "locataire", "propriétaire", "proprio", "bailleur", "syndic", "agence",
+    "voisin", "voisinage", "voisine",
+    "Paris", "loyer", "m²", "m2", "métré", "mètre carré",
+    "habitat", "habitation", "domicile", "chez moi", "chez nous",
+    "DPE", "rénovation", "renovation", "travaux", "chantier",
+    "HLM", "social", "logement social",
+    "achat immo", "achat immobilier", "prêt immobilier",
+    "déménagement", "demenagement",
+    "AG", "assemblée générale", "trustee"
+  ]
+}

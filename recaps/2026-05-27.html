@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Insolite Radar — 27 mai 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,800;9..144,900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f3ede2;
+    --bg-card: #fbf6ec;
+    --ink: #1a1612;
+    --ink-soft: #5a4f44;
+    --accent: #c2410c;
+    --accent-soft: #fde7dc;
+    --line: #d8cdb8;
+    --quote: #7a3e0c;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Inter', system-ui, sans-serif;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  body {
+    background-image:
+      radial-gradient(rgba(122,62,12,0.04) 1px, transparent 1px),
+      radial-gradient(rgba(122,62,12,0.03) 1px, transparent 1px);
+    background-size: 32px 32px, 19px 19px;
+    background-position: 0 0, 13px 13px;
+    min-height: 100vh;
+  }
+  .wrap {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 64px 28px 96px;
+  }
+  header.masthead {
+    border-bottom: 2px solid var(--ink);
+    padding-bottom: 28px;
+    margin-bottom: 48px;
+    position: relative;
+  }
+  .masthead .meta {
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    font-weight: 500;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 18px;
+  }
+  .masthead h1 {
+    font-family: 'Fraunces', Georgia, serif;
+    font-weight: 900;
+    font-size: clamp(48px, 9vw, 92px);
+    line-height: 0.92;
+    letter-spacing: -0.03em;
+    font-variation-settings: 'opsz' 144;
+  }
+  .masthead h1 em {
+    font-style: italic;
+    font-weight: 400;
+    color: var(--accent);
+  }
+  .masthead .sub {
+    margin-top: 16px;
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 18px;
+    color: var(--ink-soft);
+    font-weight: 400;
+  }
+
+  article.anecdote {
+    background: var(--bg-card);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    padding: 36px 40px 32px;
+    margin-bottom: 28px;
+    position: relative;
+    box-shadow: 0 1px 0 rgba(0,0,0,0.03), 0 12px 24px -16px rgba(60,30,5,0.08);
+  }
+  article.anecdote::before {
+    content: '';
+    position: absolute;
+    top: -1px; left: -1px; right: -1px;
+    height: 3px;
+    background: var(--accent);
+    border-radius: 4px 4px 0 0;
+  }
+  .anecdote-head {
+    display: flex;
+    align-items: baseline;
+    gap: 20px;
+    margin-bottom: 18px;
+  }
+  .num {
+    font-family: 'Fraunces', serif;
+    font-weight: 900;
+    font-size: 56px;
+    line-height: 1;
+    color: var(--accent);
+    font-variation-settings: 'opsz' 144;
+    flex-shrink: 0;
+    width: 60px;
+  }
+  .tag {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    font-weight: 600;
+    background: var(--accent-soft);
+    color: var(--accent);
+    padding: 5px 10px;
+    border-radius: 999px;
+    display: inline-block;
+    margin-left: auto;
+    align-self: center;
+  }
+  .accroche {
+    font-family: 'Fraunces', Georgia, serif;
+    font-size: 26px;
+    line-height: 1.22;
+    font-weight: 600;
+    letter-spacing: -0.015em;
+    color: var(--ink);
+    margin-bottom: 16px;
+  }
+  .contexte {
+    font-size: 15px;
+    color: var(--ink-soft);
+    margin-bottom: 22px;
+    line-height: 1.65;
+  }
+  .hook {
+    position: relative;
+    padding: 18px 22px 18px 50px;
+    background: linear-gradient(180deg, rgba(194,65,12,0.05), rgba(194,65,12,0.02));
+    border-left: 3px solid var(--accent);
+    border-radius: 0 6px 6px 0;
+    font-family: 'Fraunces', Georgia, serif;
+    font-style: italic;
+    font-size: 17px;
+    line-height: 1.5;
+    color: var(--quote);
+    font-weight: 500;
+  }
+  .hook::before {
+    content: '“';
+    position: absolute;
+    left: 14px;
+    top: -2px;
+    font-family: 'Fraunces', serif;
+    font-size: 64px;
+    color: var(--accent);
+    line-height: 1;
+    font-weight: 900;
+  }
+  .hook-label {
+    display: block;
+    font-family: 'Inter', sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 6px;
+  }
+  .source {
+    margin-top: 20px;
+    font-size: 12px;
+    letter-spacing: 0.05em;
+    color: var(--ink-soft);
+  }
+  .source a {
+    color: var(--ink);
+    text-decoration: none;
+    border-bottom: 1px solid var(--line);
+    transition: border-color 0.15s, color 0.15s;
+  }
+  .source a:hover {
+    color: var(--accent);
+    border-color: var(--accent);
+  }
+
+  footer.stats {
+    margin-top: 56px;
+    padding-top: 32px;
+    border-top: 1px solid var(--line);
+    font-size: 13px;
+    color: var(--ink-soft);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+    justify-content: space-between;
+  }
+  footer.stats strong {
+    color: var(--ink);
+    font-weight: 600;
+  }
+  footer .signature {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  @media (max-width: 580px) {
+    .wrap { padding: 32px 18px 64px; }
+    article.anecdote { padding: 24px 22px; }
+    .anecdote-head { flex-wrap: wrap; gap: 12px; }
+    .num { font-size: 44px; width: 44px; }
+    .accroche { font-size: 22px; }
+    .hook { font-size: 16px; padding: 16px 18px 16px 42px; }
+    .hook::before { font-size: 52px; left: 10px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="masthead">
+    <div class="meta">
+      <span>Édition n°1 · Mercredi 27 mai 2026</span>
+      <span>5 anecdotes / 75 articles filtrés</span>
+    </div>
+    <h1>Insolite <em>Radar</em></h1>
+    <p class="sub">Ce qu'il faut savoir aujourd'hui pour briller au bar.</p>
+  </header>
+
+  <article class="anecdote">
+    <div class="anecdote-head">
+      <span class="num">1</span>
+      <span class="tag">Paris</span>
+    </div>
+    <h2 class="accroche">Pendant 118 ans, Paris a fait voler son courrier dans des tubes à 40 km/h.</h2>
+    <p class="contexte">Sous les rues de Paris, un réseau pneumatique postal a transporté des lettres dans des cylindres métalliques propulsés à 40 km/h, livrés en moins d'une heure. Service inauguré en 1866, fermé le 30 mars 1984 à 17h précises. À son apogée, près de 460 km de tubes reliaient les bureaux de poste de la capitale.</p>
+    <div class="hook">
+      <span class="hook-label">Le hook</span>
+      Tu savais qu'à Paris on a eu pendant 118 ans un truc à la Harry Potter, mais en vrai ? Du courrier dans des tubes à air comprimé sous la ville, à 40 km/h. Ça a tourné jusqu'en 1984. Le dernier message est parti un 30 mars à 17h pile.
+    </div>
+    <p class="source">Source · <a href="https://www.pariszigzag.fr/insolite/secrets-metro/reseau-pneumatique-paris/" target="_blank" rel="noopener">Paris Zigzag</a></p>
+  </article>
+
+  <article class="anecdote">
+    <div class="anecdote-head">
+      <span class="num">2</span>
+      <span class="tag">Science</span>
+    </div>
+    <h2 class="accroche">Il existe une maladie qui transforme ton corps en un deuxième squelette.</h2>
+    <p class="contexte">La fibrodysplasie ossifiante progressive (FOP), ou « maladie de l'homme de pierre », est une maladie génétique ultra-rare. Les muscles, tendons et ligaments s'ossifient progressivement — le corps fabrique littéralement un second squelette par-dessus le premier. Un simple bleu ou une piqûre peut déclencher une nouvelle zone d'ossification. Aucun traitement à ce jour.</p>
+    <div class="hook">
+      <span class="hook-label">Le hook</span>
+      Il y a une maladie où ton corps fabrique tout seul un deuxième squelette, par-dessus l'autre. Les muscles deviennent de l'os. Et le pire : si tu te cognes, ça en crée plus.
+    </div>
+    <p class="source">Source · <a href="https://www.lemonde.fr/realites-biomedicales/article/2026/05/26/maladie-de-l-homme-de-pierre-quand-le-corps-fabrique-un-second-squelette_6693859_6579630.html" target="_blank" rel="noopener">Le Monde — Réalités biomédicales</a></p>
+  </article>
+
+  <article class="anecdote">
+    <div class="anecdote-head">
+      <span class="num">3</span>
+      <span class="tag">Société</span>
+    </div>
+    <h2 class="accroche">En Dordogne, le mystérieux voleur de boules de pétanque était… un renard.</h2>
+    <p class="contexte">Un couple de Saint-Vincent-de-Connezac (Dordogne) se faisait piquer ses boules de pétanque à répétition. Ils ont installé une caméra. Le coupable : un renard, qui venait les chiper la nuit. Aucune explication sur ce qu'il en faisait.</p>
+    <div class="hook">
+      <span class="hook-label">Le hook</span>
+      Un couple en Dordogne se faisait voler ses boules de pétanque sans arrêt. Ils ont mis une caméra. C'était un renard.
+    </div>
+    <p class="source">Source · <a href="https://www.20minutes.fr/arts-stars/insolite/4224237-20260519-dordogne-mysterieux-voleur-boules-petanque-fait-renard" target="_blank" rel="noopener">20 Minutes — Insolite</a></p>
+  </article>
+
+  <article class="anecdote">
+    <div class="anecdote-head">
+      <span class="num">4</span>
+      <span class="tag">Histoire</span>
+    </div>
+    <h2 class="accroche">La pyramide de Khéops tient debout depuis 4 600 ans grâce à des amortisseurs sismiques cachés à l'intérieur.</h2>
+    <p class="contexte">Une étude de géophysique vient de montrer que les chambres internes de la Grande Pyramide de Gizeh ne sont pas que des couloirs : leur forme et leur fréquence de vibration absorbent les ondes sismiques. C'est ce qui lui a permis de traverser 4 600 ans et plusieurs gros séismes sans dommage majeur. Les Égyptiens ont (involontairement ?) construit le premier bâtiment parasismique de l'histoire.</p>
+    <div class="hook">
+      <span class="hook-label">Le hook</span>
+      La pyramide de Khéops, ils ont compris pourquoi elle tient debout depuis 4 600 ans malgré les tremblements de terre. Ses chambres intérieures sont en fait des amortisseurs sismiques. Le premier building anti-séisme de l'histoire, par accident, en 2 600 avant J.-C.
+    </div>
+    <p class="source">Source · <a href="https://www.lefigaro.fr/sciences/des-scientifiques-devoilent-le-secret-de-la-grande-pyramide-de-kheops-pour-resister-au-seisme-20260521" target="_blank" rel="noopener">Le Figaro — Sciences</a></p>
+  </article>
+
+  <article class="anecdote">
+    <div class="anecdote-head">
+      <span class="num">5</span>
+      <span class="tag">Stats étranges</span>
+    </div>
+    <h2 class="accroche">Les « abeilles tueuses » qui envahissent les États-Unis viennent d'une fuite de labo brésilien.</h2>
+    <p class="contexte">Dans les années 50, près de São Paulo, un chercheur croise des abeilles africaines avec des locales pour booster la production de miel. Erreur de manipulation, 26 reines s'échappent. Résultat 70 ans plus tard : une espèce hybride ultra-agressive, capable d'attaquer en essaims massifs, qui remonte depuis le Brésil jusqu'aux États-Unis.</p>
+    <div class="hook">
+      <span class="hook-label">Le hook</span>
+      Les abeilles tueuses aux States, ce sont des abeilles évadées d'un labo brésilien dans les années 50. Un chercheur a foiré une expérience, 26 reines se sont barrées, et 70 ans plus tard elles ont conquis l'Amérique.
+    </div>
+    <p class="source">Source · <a href="https://www.slate.fr/sciences/abeilles-echappees-laboratoire-espece-hybride-tueuse-etats-unis-bresil-agressivite" target="_blank" rel="noopener">Slate</a></p>
+  </article>
+
+  <footer class="stats">
+    <span><strong>75</strong> articles scrapés</span>
+    <span><strong>5</strong> sources presse + lifestyle</span>
+    <span><strong>~6,7 %</strong> de signal retenu</span>
+    <span class="signature">— Insolite Radar</span>
+  </footer>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,25 @@
+{
+  "description": "Sources presse FR pour l'Insolite Radar. Privilégier les rubriques Insolite / Sciences / Société / Histoire (pas la une politique/éco hard).",
+  "sources": [
+    {
+      "name": "Le Monde — Sciences",
+      "type": "rss",
+      "feed_url": "https://www.lemonde.fr/sciences/rss_full.xml"
+    },
+    {
+      "name": "20 Minutes — Insolite",
+      "type": "rss",
+      "feed_url": "https://www.20minutes.fr/feeds/rss-insolite.xml"
+    },
+    {
+      "name": "Le Figaro — Sciences",
+      "type": "rss",
+      "feed_url": "https://www.lefigaro.fr/rss/figaro_sciences.xml"
+    },
+    {
+      "name": "Slate",
+      "type": "rss",
+      "feed_url": "https://www.slate.fr/rss.xml"
+    }
+  ]
+}

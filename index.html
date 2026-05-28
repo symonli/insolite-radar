@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Insolite Radar</title>
+<style>
+  :root {
+    --bg: #faf8f3;
+    --ink: #1c1a17;
+    --ink-soft: #4a463f;
+    --accent: #c2410c;
+    --accent-soft: #fed7aa;
+    --border: #e7e0d1;
+    --card: #ffffff;
+  }
+  * { box-sizing: border-box; }
+  body {
+    font-family: 'Charter', 'Georgia', serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.6;
+    margin: 0;
+  }
+  .wrap {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 80px 28px;
+  }
+  .eyebrow {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 0 0 16px;
+  }
+  h1 {
+    font-size: 52px;
+    line-height: 1.05;
+    margin: 0 0 20px;
+    font-weight: 700;
+    letter-spacing: -0.025em;
+  }
+  .lede {
+    font-size: 19px;
+    color: var(--ink-soft);
+    margin: 0 0 40px;
+    max-width: 560px;
+  }
+  .pitch {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 28px 32px;
+    margin: 0 0 48px;
+  }
+  .pitch h2 {
+    margin: 0 0 12px;
+    font-size: 19px;
+    letter-spacing: -0.01em;
+  }
+  .pitch p { margin: 0 0 10px; color: var(--ink-soft); font-size: 15.5px; }
+  .pitch p:last-child { margin-bottom: 0; }
+  .archive h2 {
+    font-size: 14px;
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 12px;
+    margin: 0 0 18px;
+  }
+  .recap-list { list-style: none; padding: 0; margin: 0; }
+  .recap-list li {
+    border-bottom: 1px solid var(--border);
+    padding: 18px 0;
+  }
+  .recap-list a {
+    color: var(--accent);
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: 600;
+  }
+  .recap-list a:hover { text-decoration: underline; }
+  .recap-list .date {
+    display: block;
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 12px;
+    color: var(--ink-soft);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 4px;
+  }
+  .recap-list .desc {
+    color: var(--ink-soft);
+    font-size: 14.5px;
+    margin-top: 4px;
+  }
+  footer {
+    margin-top: 60px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+    font-size: 13px;
+    color: var(--ink-soft);
+  }
+  footer a { color: var(--accent); }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <p class="eyebrow">Insolite Radar</p>
+  <h1>5 anecdotes par jour, à raconter au bar.</h1>
+  <p class="lede">Veille quotidienne sur la presse FR, Reddit, Wikipédia et le lifestyle parisien. Filtre : "racontable au bar + lien habitat/logement".</p>
+
+  <div class="pitch">
+    <h2>Pourquoi ce projet</h2>
+    <p>Conçu pour une collègue chez <a href="https://matera.eu" style="color: var(--accent);">Matera</a> (proptech / copropriété). Les anecdotes doivent à la fois passer le test "ah ouais ?" en soirée <strong>et</strong> avoir un lien avec l'habitat, l'urbanisme, l'architecture ou la vie en immeuble.</p>
+    <p>3 vraies bonnes anecdotes par jour valent mieux que 5 dont 2 hors-sujet.</p>
+  </div>
+
+  <div class="archive">
+    <h2>Recaps</h2>
+    <ul class="recap-list">
+      <li>
+        <span class="date">28 mai 2026 · run #2</span>
+        <a href="recaps/2026-05-28.html">Le mur à 41°, l'appart à 1M€ annulé, et les Choux de Créteil</a>
+        <p class="desc">Premier run avec le filtre logement durci + Reddit et Wikipédia en source.</p>
+      </li>
+      <li>
+        <span class="date">27 mai 2026 · run #1</span>
+        <a href="recaps/2026-05-27.html">Le réseau pneumatique parisien, la Maison Haute de Lille</a>
+        <p class="desc">Run de validation du concept (avant pivot filtre logement).</p>
+      </li>
+    </ul>
+  </div>
+
+  <footer>
+    <p>Projet open-source · <a href="https://github.com/symonli/insolite-radar">github.com/symonli/insolite-radar</a></p>
+  </footer>
+
+</div>
+</body>
+</html>
