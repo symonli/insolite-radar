@@ -8,14 +8,15 @@ Manuel : "fais tourner l'insolite radar" ou "lance un run".
 
 ---
 
-## Architecture (V2)
+## Architecture (V3)
 
 ```
-Phase 1 — SCRAPING (Bash parallèles, ~20s)
+Phase 1 — SCRAPING (Bash parallèles, ~60s)
   ├── python3 tools/scrape_rss.py --config=config/sources_presse.json
   ├── python3 tools/scrape_rss.py --config=config/sources_lifestyle.json
   ├── python3 tools/scrape_reddit.py --config=config/sources_reddit.json
-  └── python3 tools/scrape_wikipedia_otd.py
+  ├── python3 tools/scrape_wikipedia_otd.py
+  └── python3 tools/scrape_instagram.py    [coût ~$0.35/run, Apify]
        ↓ (données brutes sauvées dans .tmp/runs/YYYY-MM-DD/)
 
 Phase 2 — ANALYSE (séquentielle, skills dans la conversation principale)
@@ -23,13 +24,15 @@ Phase 2 — ANALYSE (séquentielle, skills dans la conversation principale)
   2. /analyze-lifestyle    → top anecdotes Paris / lifestyle (lien habitat)
   3. /analyze-reddit       → top anecdotes Reddit FR (lien habitat)
   4. /analyze-wikipedia    → top anecdotes éphémérides (lien habitat)
+  5. /analyze-social       → top anecdotes Instagram (règle stricte, cross-check)
        ↓ (chaque skill retourne ses anecdotes filtrées en JSON)
 
 Phase 3 — RÉCAP
-  → Compiler les 5 meilleures dans recaps/YYYY-MM-DD.md (+ .html)
+  → Compiler les meilleures dans recaps/YYYY-MM-DD.md (+ .html)
+  → Volume cible : 5-20 anecdotes selon demande utilisateur
 ```
 
-**Hors V2** : `analyze-data-insolite` (INSEE / Guinness) et social (Instagram / TikTok). Voir CLAUDE.md.
+**Hors V3** : `analyze-data-insolite` (INSEE / Guinness) et TikTok. Voir CLAUDE.md.
 
 ---
 
@@ -47,19 +50,22 @@ python3 tools/scrape_rss.py --config=config/sources_presse.json > .tmp/runs/YYYY
 python3 tools/scrape_rss.py --config=config/sources_lifestyle.json > .tmp/runs/YYYY-MM-DD/lifestyle.json
 python3 tools/scrape_reddit.py --config=config/sources_reddit.json > .tmp/runs/YYYY-MM-DD/reddit.json
 python3 tools/scrape_wikipedia_otd.py > .tmp/runs/YYYY-MM-DD/wikipedia.json
+python3 tools/scrape_instagram.py > .tmp/runs/YYYY-MM-DD/instagram.json
 ```
 
-Les 4 scrapers tournent en parallèle dans 4 Bash distincts.
+Les 5 scrapers tournent en parallèle dans 5 Bash distincts.
+⚠️ Instagram = Apify payant (~$0.35/run, free tier $5/mois). Si on veut alléger : sauter Instagram ou réduire à 2 comptes.
 
 ### 2. Analyse — Skills séquentiels
 
 Lancer chaque skill un par un dans la conversation principale. L'utilisatrice peut intervenir entre chaque ("skip celui-là", "trop politique").
 
 **Ordre** :
-1. `/analyze-lifestyle` — filtre Paris / lifestyle → top 2-4 anecdotes (souvent le meilleur signal car bâti urbain natif)
-2. `/analyze-reddit` — filtre Reddit FR → top 2-4 anecdotes (histoires vécues de coproprios/locataires)
-3. `/analyze-presse` — filtre presse → top 2-4 anecdotes
-4. `/analyze-wikipedia` — filtre éphémérides → 0-2 anecdotes (souvent rien, c'est OK)
+1. `/analyze-lifestyle` — filtre Paris / lifestyle → top 1-3 anecdotes
+2. `/analyze-reddit` — filtre Reddit FR → top 4-8 anecdotes (histoires vécues coproprios/locataires)
+3. `/analyze-social` — filtre Instagram → top 3-5 anecdotes (règle stricte + cross-check)
+4. `/analyze-presse` — filtre presse → top 1-3 anecdotes
+5. `/analyze-wikipedia` — filtre éphémérides → 0-2 anecdotes (souvent rien, c'est OK)
 
 Chaque skill :
 1. Lit `.tmp/runs/YYYY-MM-DD/{source}.json`

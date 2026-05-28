@@ -1,45 +1,37 @@
 {
-  "description": "Comptes Instagram FR à signal élevé sur l'angle habitat / urbain / patrimoine bâti / histoire de Paris. Identifiés via le POC v1 (hashtag) du 2026-05-28 — les comptes éditoriaux écrivent de vraies anecdotes structurées (vs photos esthétiques sans texte).",
-  "poc_version": "v2-by-account",
+  "description": "Comptes Instagram FR à signal élevé sur l'angle habitat / urbain / patrimoine bâti / histoire de Paris. Validés via POC v2 (par compte) le 2026-05-28. @somethingcurated drop (anglophone international), @paris.zigzag handle invalide.",
   "accounts": [
     {
       "handle": "musee.des.egouts.de.paris",
       "type": "institutionnel",
-      "angle": "infra urbaine, archives, égoutiers",
-      "confidence": "high"
-    },
-    {
-      "handle": "indygames_diary",
-      "type": "éditorial long-form",
-      "angle": "Haussmann, histoire de Paris, chiffres concrets",
-      "confidence": "high"
+      "angle": "infra urbaine, archives, égouts de Paris",
+      "kw_habitat_rate": 0.93,
+      "confidence": "validated"
     },
     {
       "handle": "paris.la.douce",
       "type": "éditorial long-form",
-      "angle": "lieux Paris, anecdotes structurées",
-      "confidence": "medium"
+      "angle": "micro-quartiers Paris, lieux insolites, patrimoine bâti",
+      "kw_habitat_rate": 0.93,
+      "confidence": "validated"
+    },
+    {
+      "handle": "indygames_diary",
+      "type": "éditorial long-form",
+      "angle": "Haussmann, histoire de Paris, énigmes architecturales",
+      "kw_habitat_rate": 0.45,
+      "confidence": "validated"
     },
     {
       "handle": "lesescapadesdeleonie",
       "type": "guide long-form",
-      "angle": "guides Paris détaillés",
-      "confidence": "medium"
-    },
-    {
-      "handle": "paris.zigzag",
-      "type": "média lifestyle",
-      "angle": "anecdotes Paris insolite, redondant avec RSS Paris Zigzag mais à valider",
-      "confidence": "to_validate"
-    },
-    {
-      "handle": "somethingcurated",
-      "type": "média culture/archi",
-      "angle": "architecture, design urbain",
-      "confidence": "to_validate"
+      "angle": "guides Paris détaillés — filtrer le générique touristique",
+      "kw_habitat_rate": 0.60,
+      "confidence": "validated_with_filter"
     }
   ],
   "posts_per_account": 5,
-  "total_posts_per_run": 30,
-  "estimated_cost_per_run_usd": 0.07
+  "actor_note": "L'actor apify/instagram-scraper outrepasse resultsLimit et retourne ~30 posts/compte. Coût réel : ~$0.35/run (vs $0.07 estimé).",
+  "estimated_cost_per_run_usd": 0.35,
+  "estimated_monthly_cost_usd": 10
 }
