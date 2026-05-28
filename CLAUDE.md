@@ -96,7 +96,8 @@ Activé :
 
 Pas encore activé (V3+) :
 - INSEE / Guinness — `analyze-data-insolite` (skill placeholder)
-- Instagram / TikTok — nécessite compte dédié + Playwright + numéro virtuel jetable (cf décision : non priorisé en V2)
+- **Instagram via Apify** — POC v1 fait (par hashtag, 10% signal), POC v2 prévu (par compte éditorial, attente validation). Voir `.tmp/poc/apify/POC_REPORT.md` + `config/lessons.md`. Coût estimé en cas d'activation : ~$2/mois.
+- TikTok — non priorisé tant qu'Instagram POC pas validé
 
 ## Fin de run
 

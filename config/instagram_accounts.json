@@ -1,0 +1,45 @@
+{
+  "description": "Comptes Instagram FR à signal élevé sur l'angle habitat / urbain / patrimoine bâti / histoire de Paris. Identifiés via le POC v1 (hashtag) du 2026-05-28 — les comptes éditoriaux écrivent de vraies anecdotes structurées (vs photos esthétiques sans texte).",
+  "poc_version": "v2-by-account",
+  "accounts": [
+    {
+      "handle": "musee.des.egouts.de.paris",
+      "type": "institutionnel",
+      "angle": "infra urbaine, archives, égoutiers",
+      "confidence": "high"
+    },
+    {
+      "handle": "indygames_diary",
+      "type": "éditorial long-form",
+      "angle": "Haussmann, histoire de Paris, chiffres concrets",
+      "confidence": "high"
+    },
+    {
+      "handle": "paris.la.douce",
+      "type": "éditorial long-form",
+      "angle": "lieux Paris, anecdotes structurées",
+      "confidence": "medium"
+    },
+    {
+      "handle": "lesescapadesdeleonie",
+      "type": "guide long-form",
+      "angle": "guides Paris détaillés",
+      "confidence": "medium"
+    },
+    {
+      "handle": "paris.zigzag",
+      "type": "média lifestyle",
+      "angle": "anecdotes Paris insolite, redondant avec RSS Paris Zigzag mais à valider",
+      "confidence": "to_validate"
+    },
+    {
+      "handle": "somethingcurated",
+      "type": "média culture/archi",
+      "angle": "architecture, design urbain",
+      "confidence": "to_validate"
+    }
+  ],
+  "posts_per_account": 5,
+  "total_posts_per_run": 30,
+  "estimated_cost_per_run_usd": 0.07
+}

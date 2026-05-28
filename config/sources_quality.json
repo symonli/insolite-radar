@@ -41,6 +41,30 @@
       "retained": 1,
       "ratio": 0.067,
       "notes": "Beaucoup de fait divers léger. Trier sec, ne garder que les anecdotes durables."
+    },
+    "Instagram (Apify, hashtag) — POC v1": {
+      "rating": "⚡",
+      "runs": 0,
+      "items_scraped": 30,
+      "retained": 0,
+      "ratio_poc": 0.10,
+      "ratio_poc_with_borderline": 0.37,
+      "notes": "POC le 2026-05-28 sur 3 hashtags (#parisinsolite, #parisladouce, #oldparis). 10% pépites + 27% borderline. Conclusion : scraping par hashtag = sous-optimal, pivoter sur scraping par compte (POC v2 à venir). Coût v1 : $0.07."
+    },
+    "Instagram (Apify, by account) — POC v2": {
+      "rating": "🔥",
+      "runs": 1,
+      "items_scraped": 151,
+      "retained": 0,
+      "ratio_kw_habitat_avg": 0.65,
+      "best_accounts": [
+        "@musee.des.egouts.de.paris (93% kw habitat)",
+        "@paris.la.douce (93%)",
+        "@indygames_diary (45%, anecdotes historiques avec chiffres)",
+        "@lesescapadesdeleonie (60%, filtrer guide générique)"
+      ],
+      "drop_accounts": ["@somethingcurated (anglophone, international)", "@paris.zigzag (handle invalide)"],
+      "notes": "POC v2 le 2026-05-28 sur 6 comptes éditoriaux. Verdict : 🔥 le pivot par compte fonctionne. 4 comptes confirmés pour V3. Coût v2 : $0.35 (151 posts au lieu de 30 — actor outrepasse resultsLimit). Coût prod estimé : ~$3-10/mois."
     }
   }
 }

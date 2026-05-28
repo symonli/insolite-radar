@@ -50,9 +50,62 @@ Sans le 2e critère, 4/5 anecdotes du run #1 étaient hors-sujet pour elle (rena
 - Le Monde Insolite (`/insolite/rss_full.xml`) : 404
 
 ### Sources non priorisées
-- **Instagram/TikTok** : nécessitent compte dédié + numéro virtuel (Hushed ~5€). Décision : skip V2, ouvrir en V3 si besoin (cf `.env.example`, prévu pour Apify).
+- **TikTok** : DOM instable, peu de texte par vidéo. Skip V3 si POC Instagram concluant suffit.
 - **Sources pro habitat** (Batiactu, AMC, MySweetImmo, Capital Immo, etc.) : drop — trop B2B / publi-reportage matériaux durables, peu de "ah ouais".
 - **INSEE / Guinness** : skill `analyze-data-insolite` en placeholder V3.
+
+### Instagram via Apify — POC v1 (2026-05-28)
+
+**Décision sur la création de compte Insta dédié** : abandonnée. Le numéro virtuel (Hushed ~5€) + maintenance + risque de ban → on est passé à **Apify** (provider de scraping payant, pas de compte Insta requis).
+
+**POC v1 — scraping par hashtag** :
+- 3 hashtags × 10 posts via `apify/instagram-hashtag-scraper`
+- Coût : $0.07. Temps : 41s.
+- **Résultats : 10% pépites (3), 27% borderline (8), 63% bruit (19)**
+- 3 pépites = matière à 1 jour de recap
+
+**Leçon clé** : le scraping par hashtag est sous-optimal — trop de photos esthétiques sans texte (#parisladouce, #oldparis noyés). Les **comptes éditoriaux** (institutionnels ou long-form) écrivent de vraies anecdotes structurées exploitables.
+
+**Comptes éditoriaux à fort signal identifiés** :
+- `@musee.des.egouts.de.paris` — compte institutionnel, infra urbaine, archives 🔥
+- `@indygames_diary` — anecdotes Haussmann/histoire de Paris (long-form) 🔥
+- `@paris.la.douce` — long-form sur lieux Paris
+- `@lesescapadesdeleonie` — guides longs structurés
+
+**Hashtags à comportement** :
+- `#parisinsolite` — meilleur des trois (60% signal+borderline)
+- `#parisladouce` — moyen, esthétique sans payoff
+- `#oldparis` — à dégager (multilingue, 90% bruit)
+
+**Limite structurelle Instagram** : pas de source vérifiable autre que la caption. Pour chiffres type Haussmann c'est OK, mais plus fragile que Wikipédia/presse → toujours cross-check rapide avant publication.
+
+**Action V3** : POC v2 par compte (option B de la note Notion) avant industrialisation.
+
+### Instagram via Apify — POC v2 (2026-05-28, suite)
+
+POC "par compte" lancé sur les 6 comptes éditoriaux candidats. Verdict : **le pivot fonctionne**.
+
+| Compte | Posts utilisables | KW habitat | Verdict |
+|---|---|---|---|
+| `@musee.des.egouts.de.paris` | 29 (100%) | 93% | 🔥🔥 mine d'or institutionnelle |
+| `@paris.la.douce` | 30 (83%) | 93% | 🔥🔥 long-form Paris insolite |
+| `@indygames_diary` | 29 (86%) | 45% | 🔥 chiffres historiques (Haussmann) |
+| `@lesescapadesdeleonie` | 30 (100%) | 60% | ⚡ keep avec filtre (trop de guide générique) |
+| `@somethingcurated` | 30 (77%) | 23% | ❌ anglophone, international, drop |
+| `@paris.zigzag` | 0 | — | ❓ handle faux, à fixer ou drop (redondant RSS) |
+
+**Coût réel v2** : $0.35 (151 posts au lieu des 30 demandés — l'actor `apify/instagram-scraper` interprète `resultsLimit` comme "par compte"). Coût mensuel projeté en prod : ~$3-10 selon fréquence.
+
+**Pépites identifiées en v2** (échantillon) :
+- Émissaire Nord-Est (réseau égouts Paris, 17 km, construit 1935-1960)
+- La Maison Rose à Montmartre (petit immeuble, Modigliani/Utrillo)
+- Mouzaïa / Butte Beauregard (micro-quartier Paris 19e méconnu)
+- "La Campagne à Paris" (Paris 20e bucolique)
+- Haussmann en chiffres (déjà connu, recoupé)
+
+**Reco V3 finale** : 4 comptes (égouts, paris.la.douce, indygames_diary, lesescapadesdeleonie). Skill `analyze-social` à créer avec règle stricte (donnée vérifiable + lien habitat + cross-check chiffres).
+
+Voir `.tmp/poc/apify/POC_REPORT_v2.md`.
 
 ## Format / rédaction
 
