@@ -107,6 +107,36 @@ POC "par compte" lancé sur les 6 comptes éditoriaux candidats. Verdict : **le 
 
 Voir `.tmp/poc/apify/POC_REPORT_v2.md`.
 
+### Instagram via Apify — POC v3 (2026-05-28, extension)
+
+Demande : "fais plus de comptes moins de posts par compte, ils postent au plus 10x/sem".
+
+Changements :
+- 4 → 11 comptes demandés (7 nouveaux candidats)
+- 5 → 3 posts par compte
+- Ajout du filtre `onlyPostsNewerThan` (7 jours) → la vraie économie
+
+Résultats :
+- **Filtre 7j efficace** : 27 posts au lieu de 151 (économie 5x), $0.06 au lieu de $0.35
+- **1 seul nouveau compte validé** : `@parisjetaime` (Office du Tourisme officiel, ~1 pépite par 5 posts — angle promo dominant, à filtrer)
+- **6 handles invalides** : @paris.secret, @urbex.france, @paris_capitale, @paris_avant_apres, @chateauxfrancais, @stephanebernofficiel → tous "unknown" dans la réponse Apify
+
+**Leçon clé** : sans vérifier manuellement l'existence des handles avant de blast Apify, on perd du temps et du quota sur des comptes fantômes. Pour V4 : valider chaque handle sur instagram.com/{handle}/ AVANT de l'ajouter à la config.
+
+**État final Instagram (V3)** : 5 comptes validés (4 POC v2 + @parisjetaime). Coût mensuel projeté : ~$1.80.
+
+### TikTok via Apify — POC v3 FAILED (2026-05-28)
+
+Premier test TikTok captions-seules via `clockworks/free-tiktok-scraper`.
+
+Résultat : **3/5 comptes inexistants, 2/5 retournent juste le profil (0 vidéo)**. Total : 5 items mais 0 vidéo exploitable.
+
+**Cause** : handles inexacts ou inactifs. Même problème qu'Instagram : j'ai supposé l'existence de comptes que je ne pouvais pas vérifier.
+
+**Décision** : NOGO TikTok pour la V3. À relancer quand Simon donnera 5 handles TikTok qu'il a vérifiés manuellement (recherche TikTok.com/@handle).
+
+**Hypothèse à tester quand on aura des comptes valides** : captions TikTok ≈ 100-300 chars contre 1 000-2 000 sur Insta. Le filtre habitat aura sans doute un signal beaucoup plus faible. Si confirmé, on ajouterait Whisper pour transcription (~$0.10 par run pour 30 vidéos).
+
 ## Format / rédaction
 
 ### Patterns qui fonctionnent

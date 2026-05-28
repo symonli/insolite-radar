@@ -1,24 +1,25 @@
 """
-POC Apify v2 — Scrape Instagram par compte (suite du POC v1 par hashtag).
+Scrape Instagram par compte (production, suite POC v2 validé).
 
-Objectif : valider que le scraping par compte éditorial donne un meilleur signal
-que le scraping par hashtag (POC v1 du 2026-05-28 : 10% pépites + 27% borderline).
-
-Actor utilisé : apify/instagram-scraper (mode directUrls = par profil)
-Tarif estimé : ~$2.30 / 1000 posts. Pour 30 posts (6 comptes × 5) → ~$0.07.
+Actor : apify/instagram-scraper (mode directUrls = par profil)
+Tarif : ~$2.30 / 1000 posts. Le filtre `onlyPostsNewerThan` (par défaut 7 jours)
+limite drastiquement le volume retourné — l'actor ignore souvent resultsLimit
+sinon.
 
 Usage :
-    python3 tools/poc_apify_instagram_by_account.py
-    python3 tools/poc_apify_instagram_by_account.py --config=config/instagram_accounts.json --limit=5
+    python3 tools/scrape_instagram.py
+    python3 tools/scrape_instagram.py --config=config/instagram_accounts.json --limit=3
+    python3 tools/scrape_instagram.py --since-days=14
 
-Output : JSON raw + normalized dans .tmp/poc/apify/, résumé sur stdout.
+Output : par défaut va dans `.tmp/runs/YYYY-MM-DD/instagram.json` si on est dans
+un run (variable env RUN_DATE), sinon dans `.tmp/poc/apify/`.
 """
 
 import json
 import os
 import sys
 import time
-from datetime import datetime
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
 import requests
@@ -30,7 +31,8 @@ APIFY_ACTOR = "apify~instagram-scraper"
 APIFY_ENDPOINT = f"https://api.apify.com/v2/acts/{APIFY_ACTOR}/run-sync-get-dataset-items"
 
 DEFAULT_CONFIG = "config/instagram_accounts.json"
-DEFAULT_LIMIT_PER_ACCOUNT = 5
+DEFAULT_LIMIT_PER_ACCOUNT = 3
+DEFAULT_SINCE_DAYS = 7
 
 
 def load_env():
@@ -46,18 +48,28 @@ def load_env():
 
 
 def load_accounts(config_path):
+    """Lit la config et concatène validated_accounts + to_validate_accounts."""
     p = PROJECT_ROOT / config_path if not Path(config_path).is_absolute() else Path(config_path)
     config = json.loads(p.read_text(encoding="utf-8"))
-    return config.get("accounts", []), config.get("posts_per_account", DEFAULT_LIMIT_PER_ACCOUNT)
+    # Accepte les 2 formats : "accounts" (legacy) ou validated + to_validate
+    accounts = (
+        config.get("accounts")
+        or (config.get("validated_accounts", []) + config.get("to_validate_accounts", []))
+    )
+    limit = config.get("posts_per_account", DEFAULT_LIMIT_PER_ACCOUNT)
+    since_days = config.get("only_posts_newer_than_days", DEFAULT_SINCE_DAYS)
+    return accounts, limit, since_days
 
 
-def scrape_accounts(accounts, posts_per_account, token):
+def scrape_accounts(accounts, posts_per_account, since_days, token):
     """
     Lance l'actor sur tous les comptes en un seul appel via directUrls.
     Retourne la liste de posts bruts (mélangés tous comptes).
+    Filtre `onlyPostsNewerThan` = date ISO YYYY-MM-DD calculée depuis since_days.
     """
     direct_urls = [f"https://www.instagram.com/{a['handle']}/" for a in accounts]
     total_results = posts_per_account * len(accounts)
+    cutoff = (datetime.now(timezone.utc) - timedelta(days=since_days)).strftime("%Y-%m-%d")
 
     payload = {
         "directUrls": direct_urls,
@@ -65,8 +77,10 @@ def scrape_accounts(accounts, posts_per_account, token):
         "resultsLimit": total_results,
         "searchType": "user",
         "addParentData": False,
+        "onlyPostsNewerThan": cutoff,
     }
     params = {"token": token, "timeout": 600}
+    print(f"[INFO] cutoff onlyPostsNewerThan = {cutoff}", file=sys.stderr)
 
     t0 = time.time()
     resp = requests.post(APIFY_ENDPOINT, params=params, json=payload, timeout=620)
@@ -117,20 +131,25 @@ def main():
 
     config_path = DEFAULT_CONFIG
     override_limit = None
+    override_since = None
     for arg in sys.argv[1:]:
         if arg.startswith("--config="):
             config_path = arg.split("=", 1)[1]
         elif arg.startswith("--limit="):
             override_limit = int(arg.split("=", 1)[1])
+        elif arg.startswith("--since-days="):
+            override_since = int(arg.split("=", 1)[1])
 
-    accounts, posts_per_account = load_accounts(config_path)
+    accounts, posts_per_account, since_days = load_accounts(config_path)
     if not accounts:
         print(f"[FATAL] Aucun compte dans {config_path}", file=sys.stderr)
         sys.exit(1)
     if override_limit is not None:
         posts_per_account = override_limit
+    if override_since is not None:
+        since_days = override_since
 
-    print(f"[INFO] {len(accounts)} comptes × {posts_per_account} posts attendus", file=sys.stderr)
+    print(f"[INFO] {len(accounts)} comptes × {posts_per_account} posts, fenêtre {since_days}j", file=sys.stderr)
     for a in accounts:
         print(f"  - @{a['handle']} ({a.get('type','?')}) — {a.get('angle','')}", file=sys.stderr)
 
@@ -139,7 +158,7 @@ def main():
     raw_path = POC_DIR / f"raw_by_account_{stamp}.json"
     normalized_path = POC_DIR / f"normalized_by_account_{stamp}.json"
 
-    items = scrape_accounts(accounts, posts_per_account, token)
+    items = scrape_accounts(accounts, posts_per_account, since_days, token)
 
     # Sauvegarde incrémentale : on écrit avant même la normalisation
     raw_path.write_text(json.dumps(items, ensure_ascii=False, indent=2))

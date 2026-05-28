@@ -65,6 +65,28 @@
       ],
       "drop_accounts": ["@somethingcurated (anglophone, international)", "@paris.zigzag (handle invalide)"],
       "notes": "POC v2 le 2026-05-28 sur 6 comptes éditoriaux. Verdict : 🔥 le pivot par compte fonctionne. 4 comptes confirmés pour V3. Coût v2 : $0.35 (151 posts au lieu de 30 — actor outrepasse resultsLimit). Coût prod estimé : ~$3-10/mois."
+    },
+    "Instagram (Apify, by account, +fenêtre 7j) — POC v3": {
+      "rating": "🔥",
+      "runs": 1,
+      "items_scraped": 27,
+      "retained": 0,
+      "best_accounts": [
+        "@parisjetaime (nouveau compte validé, 1 pépite/5 — Office du Tourisme officiel)"
+      ],
+      "invalid_handles": ["@paris.secret", "@urbex.france", "@paris_capitale", "@paris_avant_apres", "@chateauxfrancais", "@stephanebernofficiel"],
+      "notes": "POC v3 le 2026-05-28 sur 11 comptes (4 validés + 7 nouveaux). Filtre onlyPostsNewerThan=7j → ramène 27 posts (vs 151 sans filtre) = économie 5x. 1 nouveau compte validé (@parisjetaime). 6 handles invalides à corriger ou drop. Coût v3 : ~$0.06. Coût mensuel projeté : ~$1.80."
+    },
+    "TikTok (Apify, by account) — POC v3 FAILED": {
+      "rating": "❌",
+      "runs": 1,
+      "items_scraped": 5,
+      "valid_videos": 0,
+      "actor": "clockworks/free-tiktok-scraper",
+      "verdict": "NOGO en l'état",
+      "invalid_handles": ["@paris.histoire", "@lhistoireenimages", "@guerinmoreaux"],
+      "empty_profile_handles": ["@parismaville", "@stephanebernofficiel"],
+      "notes": "POC TikTok le 2026-05-28 : 3/5 comptes inexistants, 2/5 retournent juste le profil sans vidéo. Cause possible : handles inexacts ou comptes inactifs. NOGO en l'état — relancer si Simon donne 5 handles TikTok qu'il a vérifiés manuellement."
     }
   }
 }

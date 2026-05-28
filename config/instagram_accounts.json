@@ -1,6 +1,6 @@
 {
-  "description": "Comptes Instagram FR à signal élevé sur l'angle habitat / urbain / patrimoine bâti / histoire de Paris. Validés via POC v2 (par compte) le 2026-05-28. @somethingcurated drop (anglophone international), @paris.zigzag handle invalide.",
-  "accounts": [
+  "description": "Comptes Instagram FR à signal élevé sur l'angle habitat/urbain/patrimoine. 5 validés + 6 handles invalides à corriger. Cap à 3 posts récents par compte + filtre onlyPostsNewerThan (7j) pour économiser Apify.",
+  "validated_accounts": [
     {
       "handle": "musee.des.egouts.de.paris",
       "type": "institutionnel",
@@ -25,13 +25,31 @@
     {
       "handle": "lesescapadesdeleonie",
       "type": "guide long-form",
-      "angle": "guides Paris détaillés — filtrer le générique touristique",
+      "angle": "guides Paris — filtrer le générique touristique",
       "kw_habitat_rate": 0.60,
+      "confidence": "validated_with_filter"
+    },
+    {
+      "handle": "parisjetaime",
+      "type": "compte officiel Office du Tourisme",
+      "angle": "Paris promo + occasionnellement patrimoine (jardins cachés, lieux confidentiels). 1 pépite sur 5 au POC v3.",
+      "kw_habitat_rate": 0.20,
       "confidence": "validated_with_filter"
     }
   ],
-  "posts_per_account": 5,
-  "actor_note": "L'actor apify/instagram-scraper outrepasse resultsLimit et retourne ~30 posts/compte. Coût réel : ~$0.35/run (vs $0.07 estimé).",
-  "estimated_cost_per_run_usd": 0.35,
-  "estimated_monthly_cost_usd": 10
+  "to_validate_accounts": [],
+  "invalid_handles": [
+    {"handle": "paris.secret", "note": "handle pas trouvé — chercher la bonne ortho"},
+    {"handle": "urbex.france", "note": "handle pas trouvé"},
+    {"handle": "paris_capitale", "note": "handle pas trouvé"},
+    {"handle": "paris_avant_apres", "note": "handle pas trouvé"},
+    {"handle": "chateauxfrancais", "note": "handle pas trouvé"},
+    {"handle": "stephanebernofficiel", "note": "handle pas trouvé"}
+  ],
+  "posts_per_account": 3,
+  "only_posts_newer_than_days": 7,
+  "actor": "apify/instagram-scraper",
+  "actor_note": "Avec onlyPostsNewerThan=7j et posts_per_account=3, l'actor reste prévisible : POC v3 a ramené 27 posts sur 5 comptes valides (~$0.06).",
+  "estimated_cost_per_run_usd": 0.06,
+  "estimated_monthly_cost_usd": 1.8
 }
