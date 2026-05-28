@@ -137,6 +137,41 @@ Résultat : **3/5 comptes inexistants, 2/5 retournent juste le profil (0 vidéo)
 
 **Hypothèse à tester quand on aura des comptes valides** : captions TikTok ≈ 100-300 chars contre 1 000-2 000 sur Insta. Le filtre habitat aura sans doute un signal beaucoup plus faible. Si confirmé, on ajouterait Whisper pour transcription (~$0.10 par run pour 30 vidéos).
 
+### Apify POC v4 (2026-05-28, après leçon "ne pas inventer de handles")
+
+Simon a recadré : "n'invente pas de handles, renseigne-toi". Voir [[feedback_no_invented_handles]].
+
+Méthode appliquée : agent général-purpose qui a triangulé via WebSearch + articles éditoriaux (Ville de Paris, Time Out, Le Bonbon, Tuxboard, Sauvegarde Art Français) → 8 candidats Instagram + 6 candidats TikTok, chacun **sourcé** par 1 à 3 articles.
+
+**Instagram v4 — verdict** (8 candidats testés) :
+- ✅ 4 nouveaux validés : `@toits_de_paris` (668K), `@parissecret` (912K, à filtrer fort), `@laurentkronental` (29K, dormant mais ULTRA pertinent Grands Ensembles), `@maisonspaysannes` (4.7K, bâti rural)
+- ⚪ 4 silencieux (0 post < 7j) : `@latete_enlair`, `@doorwaysofparis`, `@chateaugudanes`, `@aurelienvillette` — à retester sans filtre 7j pour différencier "compte inactif" vs "handle invalide"
+
+**Instagram V4 final** : 9 comptes actifs. Coût estimé : ~$0.15/run, ~$4.50/mois.
+
+**TikTok v2 — verdict** (6 candidats testés) :
+- ✅ 4 validés :
+  - `@paris__secret` (44K) — captions 920c moyenne, 5/5 hits habitat 🔥🔥
+  - `@vivreparis` (48K) — captions 700c moyenne, 5/5 hits 🔥
+  - `@actu.paris` (24.7K) — captions 282c, 3/5 hits ⚡
+  - `@adrienurbex` (521K) — captions 144c, 4/5 hits 🟡 (filtrer le ton "paranormal")
+- ❌ 2 dropés : `@debaz.media` (captions = juste hashtags), `@rues_de_paris` (caption vide)
+
+**Surprise majeure** : `@paris__secret` a des captions aussi longues qu'Insta (~920c). L'hypothèse "captions TikTok trop courtes pour le filtre habitat" n'a tenu **que sur 2/6 comptes**. La règle "1 source ≠ 1 verdict" reste vraie.
+
+**TikTok V4 final** : 4 comptes actifs. Coût estimé : ~$0.10/run, ~$3/mois.
+
+**Skill `analyze-tiktok`** créé avec **règle cross-check OBLIGATOIRE** sur tous les chiffres/dates cités (Wikipédia, Google) — la caption peut être vague ou exagérée. Différence majeure avec `analyze-social` qui cross-check seulement si doute.
+
+### Leçon de méthode (post-v4)
+
+**Vérifier les handles avant le blast Apify** = règle dure désormais. Avant tout ajout dans un fichier `*_accounts.json`, l'agent doit :
+1. Soit : visiter `instagram.com/{handle}` / `tiktok.com/@{handle}` via WebFetch
+2. Soit : avoir une source tierce (article éditorial, base d'analytics, mention dans un classement) qui confirme l'existence
+3. Soit : demander à Simon
+
+Coût d'une mauvaise habitude : 6 handles Insta hallucinés + 3 TikTok hallucinés en POC v3 = ~$0.10 perdus en quota Apify + 1h de POC sans résultat. Coût d'une bonne habitude (agent triangulation) : 30 min + ~$0.20 en POCs v4 réussis.
+
 ## Format / rédaction
 
 ### Patterns qui fonctionnent

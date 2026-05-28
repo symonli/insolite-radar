@@ -48,7 +48,9 @@ def load_env():
 def load_accounts(config_path):
     p = PROJECT_ROOT / config_path if not Path(config_path).is_absolute() else Path(config_path)
     config = json.loads(p.read_text(encoding="utf-8"))
-    return config.get("accounts", []), config.get("videos_per_account", DEFAULT_LIMIT)
+    # Accepte les 2 formats : "accounts" (legacy) ou validated_accounts (v2+)
+    accounts = config.get("accounts") or config.get("validated_accounts", [])
+    return accounts, config.get("videos_per_account", DEFAULT_LIMIT)
 
 
 def scrape_accounts(accounts, videos_per_account, token):

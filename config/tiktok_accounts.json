@@ -1,33 +1,56 @@
 {
-  "description": "POC TikTok captions-seules. On évalue si les captions courtes (100-300 chars) suffisent pour identifier des anecdotes habitat/Paris insolite, ou si on doit ajouter une transcription Whisper (option B).",
-  "accounts": [
+  "description": "Comptes TikTok validés pour Insolite Radar. 4 actifs après POC v2 (26 vidéos sur 6 comptes testés). 2 dropés (caption trop courte ou vide).",
+  "validated_accounts": [
     {
-      "handle": "stephanebernofficiel",
-      "type": "personnalité patrimoine",
-      "angle": "Bern raconte les châteaux, vidéos pédago"
+      "handle": "paris__secret",
+      "type": "média long-form",
+      "angle": "anecdotes Paris insolite, immeubles, hypersonique, événements — 44K followers",
+      "kw_habitat_rate": 1.0,
+      "caption_avg_chars": 920,
+      "confidence": "validated_v2",
+      "notes": "Captions très longues (~920c), 5/5 hits habitat au POC. Le meilleur signal des 6 comptes."
     },
     {
-      "handle": "lhistoireenimages",
-      "type": "vulgarisation",
-      "angle": "histoire FR en photos, patrimoine"
+      "handle": "vivreparis",
+      "type": "média cross-platform",
+      "angle": "Paris insolite, art nouveau, histoire — 48K followers TikTok",
+      "kw_habitat_rate": 1.0,
+      "caption_avg_chars": 699,
+      "confidence": "validated_v2",
+      "notes": "Captions ~700c, mais mix d'actualités magazine. Filtrer les posts purement promo."
     },
     {
-      "handle": "paris.histoire",
-      "type": "média",
-      "angle": "histoire Paris en TikTok"
+      "handle": "actu.paris",
+      "type": "média actu Paris",
+      "angle": "actu + insolite + transport + patrimoine — 24.7K followers",
+      "kw_habitat_rate": 0.60,
+      "caption_avg_chars": 282,
+      "confidence": "validated_v2_with_filter",
+      "notes": "Captions moyennes (~282c). Filtrer fait divers/police/canicule."
     },
     {
-      "handle": "parismaville",
-      "type": "compte officiel ville",
-      "angle": "Paris officiel (anecdotes patrimoine ?)"
+      "handle": "adrienurbex",
+      "type": "urbex",
+      "angle": "lieux abandonnés en France, ton 'paranormal/horreur' — 521K followers",
+      "kw_habitat_rate": 0.80,
+      "caption_avg_chars": 144,
+      "confidence": "validated_v2_with_strict_filter",
+      "notes": "Captions courtes (~144c). Beaucoup de 'temple caché', 'paranormal' — filtrer le racoleur. Garder uniquement les vidéos avec contexte précis sur un bâti."
+    }
+  ],
+  "dropped_v2_accounts": [
+    {
+      "handle": "debaz.media",
+      "reason": "Captions = juste des hashtags (138c moyenne). Pas de texte exploitable pour le filtre habitat."
     },
     {
-      "handle": "guerinmoreaux",
-      "type": "vulgarisation archi",
-      "angle": "architecte qui vulgarise sur TikTok"
+      "handle": "rues_de_paris",
+      "reason": "Caption vide (0 chars) sur le post retourné. Compte qui n'utilise pas les captions, exploit visuel uniquement."
     }
   ],
   "videos_per_account": 5,
   "actor": "clockworks/free-tiktok-scraper",
-  "estimated_cost_per_run_usd": 0.30
+  "estimated_cost_per_run_usd": 0.10,
+  "estimated_monthly_cost_usd": 3,
+  "notes": "Le script charge validated_accounts uniquement. Dropped reste là pour la doc."
 }

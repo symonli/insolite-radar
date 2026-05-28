@@ -87,6 +87,28 @@
       "invalid_handles": ["@paris.histoire", "@lhistoireenimages", "@guerinmoreaux"],
       "empty_profile_handles": ["@parismaville", "@stephanebernofficiel"],
       "notes": "POC TikTok le 2026-05-28 : 3/5 comptes inexistants, 2/5 retournent juste le profil sans vidéo. Cause possible : handles inexacts ou comptes inactifs. NOGO en l'état — relancer si Simon donne 5 handles TikTok qu'il a vérifiés manuellement."
+    },
+    "Instagram (Apify, by account, v4) — production": {
+      "rating": "🔥",
+      "runs": 1,
+      "items_scraped": 74,
+      "new_validated": ["@toits_de_paris", "@parissecret", "@laurentkronental", "@maisonspaysannes"],
+      "silent_to_recheck": ["@latete_enlair", "@doorwaysofparis", "@chateaugudanes", "@aurelienvillette"],
+      "verdict": "GO — 9 comptes actifs au total",
+      "estimated_cost_per_run_usd": 0.15,
+      "estimated_monthly_cost_usd": 4.5,
+      "notes": "POC v4 le 2026-05-28 après méthode triangulation (Agent + WebSearch + articles éditoriaux). 4/8 nouveaux candidats validés direct, 4 silencieux (à retester sans filtre 7j)."
+    },
+    "TikTok (Apify, by account, v2) — production": {
+      "rating": "🔥",
+      "runs": 1,
+      "items_scraped": 26,
+      "validated": ["@paris__secret (920c, 5/5 kw)", "@vivreparis (700c, 5/5)", "@actu.paris (282c, 3/5)", "@adrienurbex (144c, 4/5)"],
+      "dropped": ["@debaz.media (captions = juste hashtags)", "@rues_de_paris (caption vide)"],
+      "verdict": "GO — 4 comptes actifs",
+      "estimated_cost_per_run_usd": 0.10,
+      "estimated_monthly_cost_usd": 3,
+      "notes": "POC v2 le 2026-05-28 réussi : 26 vidéos sur 6 comptes (vs 5 erreurs en POC v1 sur 5 handles hallucinés). Hypothèse 'captions trop courtes' invalidée pour 2/4 comptes (paris__secret et vivreparis ont des captions long-form)."
     }
   }
 }

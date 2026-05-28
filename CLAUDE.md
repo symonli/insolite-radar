@@ -17,7 +17,7 @@ Si une seule des deux conditions tombe → filtré. Mieux : 3 vraies bonnes anec
 
 3 couches, de haut en bas :
 1. **Workflow** (`workflows/insolite_daily.md`) — l'orchestration de bout en bout. Tu le lis et tu l'exécutes.
-2. **Skills** (`.claude/skills/analyze-*/`) — les filtres par type de source. Tu les invoques avec `/analyze-presse`, `/analyze-lifestyle`, `/analyze-reddit`, `/analyze-wikipedia`.
+2. **Skills** (`.claude/skills/analyze-*/`) — les filtres par type de source. Tu les invoques avec `/analyze-presse`, `/analyze-lifestyle`, `/analyze-reddit`, `/analyze-wikipedia`, `/analyze-social` (Instagram), `/analyze-tiktok`.
 3. **Tools** (`tools/`) — scripts Python qui font le scraping. **Tu ne scrapes jamais directement — tu appelles le bon tool.**
 
 **Configs** dans `config/` — sources, leçons, qualité des sources.
@@ -86,18 +86,21 @@ L'agent apprend via `config/lessons.md` et `config/sources_quality.json`.
 - **Après chaque run** : mettre à jour `lessons.md` + `sources_quality.json`
 - **Quand l'utilisatrice corrige** ("c'est pas racontable", "trop sec", "trop déjà-vu") → noter la leçon
 
-## Périmètre actuel (V2)
+## Périmètre actuel (V4)
 
 Activé :
 - Presse FR (RSS) — `analyze-presse`
 - Lifestyle Paris (RSS) — `analyze-lifestyle`
-- **Reddit FR** (r/france, r/immobilier, r/Paris, r/AskFrance) — `analyze-reddit`
-- **Wikipédia FR Éphémérides** (page du jour) — `analyze-wikipedia`
+- Reddit FR (r/france, r/immobilier, r/Paris, r/AskFrance, r/vosfinances) — `analyze-reddit`
+- Wikipédia FR Éphémérides (page du jour) — `analyze-wikipedia`
+- **Instagram via Apify** (9 comptes éditoriaux validés) — `analyze-social` — coût ~$0.15/run
+- **TikTok via Apify** (4 comptes éditoriaux validés) — `analyze-tiktok` — coût ~$0.10/run, captions seules (pas de transcription)
 
-Pas encore activé (V3+) :
+Coût Apify total estimé : ~$0.25/run, ~$7.50/mois si tournée quotidienne.
+
+Pas encore activé (V5+) :
 - INSEE / Guinness — `analyze-data-insolite` (skill placeholder)
-- **Instagram via Apify** — POC v1 fait (par hashtag, 10% signal), POC v2 prévu (par compte éditorial, attente validation). Voir `.tmp/poc/apify/POC_REPORT.md` + `config/lessons.md`. Coût estimé en cas d'activation : ~$2/mois.
-- TikTok — non priorisé tant qu'Instagram POC pas validé
+- Transcription Whisper TikTok — si on veut capter le contenu de la voix-off (~$0.10 supplémentaire/run)
 
 ## Fin de run
 

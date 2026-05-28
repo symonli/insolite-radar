@@ -1,5 +1,5 @@
 {
-  "description": "Comptes Instagram FR à signal élevé sur l'angle habitat/urbain/patrimoine. 5 validés + 6 handles invalides à corriger. Cap à 3 posts récents par compte + filtre onlyPostsNewerThan (7j) pour économiser Apify.",
+  "description": "Comptes Instagram FR validés pour Insolite Radar. 9 comptes actifs (5 POC v2/v3 + 4 POC v4). Filtre onlyPostsNewerThan=7j + 3 posts/compte pour cap le coût Apify.",
   "validated_accounts": [
     {
       "handle": "musee.des.egouts.de.paris",
@@ -32,24 +32,57 @@
     {
       "handle": "parisjetaime",
       "type": "compte officiel Office du Tourisme",
-      "angle": "Paris promo + occasionnellement patrimoine (jardins cachés, lieux confidentiels). 1 pépite sur 5 au POC v3.",
+      "angle": "Paris promo + occasionnellement patrimoine (jardins cachés)",
       "kw_habitat_rate": 0.20,
       "confidence": "validated_with_filter"
+    },
+    {
+      "handle": "toits_de_paris",
+      "type": "photographie aérienne",
+      "angle": "façades haussmanniennes depuis les toits, 668K followers (Paul Second)",
+      "kw_habitat_rate": 0.60,
+      "confidence": "validated_v4",
+      "notes": "Caption ~200c en moyenne. Beaucoup de photos d'événements (Caverne du Pont-Neuf de JR récente)."
+    },
+    {
+      "handle": "parissecret",
+      "type": "média Paris insolite",
+      "angle": "anecdotes Paris, lifestyle, 912K followers — filtrer fort (beaucoup de promo/humour)",
+      "kw_habitat_rate": 0.30,
+      "confidence": "validated_v4_with_filter",
+      "notes": "33 posts/sem en moyenne (très actif). Le ratio habitat utile est ~30%."
+    },
+    {
+      "handle": "laurentkronental",
+      "type": "photographe d'architecture",
+      "angle": "Grands Ensembles franciliens (Tours Aillaud Nanterre, Emile Aillaud)",
+      "kw_habitat_rate": 0.95,
+      "confidence": "validated_v4_dormant",
+      "notes": "Compte dormant depuis sept 2024 mais série 'Les Yeux des Tours' ULTRA pertinente pour Matera. À garder pour les rares posts à venir."
+    },
+    {
+      "handle": "maisonspaysannes",
+      "type": "association RUP patrimoine rural",
+      "angle": "bâti ancien (< 1948), techniques traditionnelles, AG, sauvegarde",
+      "kw_habitat_rate": 0.85,
+      "confidence": "validated_v4_low_volume",
+      "notes": "1-2 posts par semaine. Captions très longues mais souvent associatives."
     }
   ],
-  "to_validate_accounts": [],
-  "invalid_handles": [
-    {"handle": "paris.secret", "note": "handle pas trouvé — chercher la bonne ortho"},
-    {"handle": "urbex.france", "note": "handle pas trouvé"},
-    {"handle": "paris_capitale", "note": "handle pas trouvé"},
-    {"handle": "paris_avant_apres", "note": "handle pas trouvé"},
-    {"handle": "chateauxfrancais", "note": "handle pas trouvé"},
-    {"handle": "stephanebernofficiel", "note": "handle pas trouvé"}
+  "silent_v4_accounts": [
+    {"handle": "latete_enlair", "note": "0 posts < 7j. Soit compte peu actif, soit Apify a un souci spécifique. À retester sans filtre 7j."},
+    {"handle": "doorwaysofparis", "note": "0 posts < 7j."},
+    {"handle": "chateaugudanes", "note": "0 posts < 7j."},
+    {"handle": "aurelienvillette", "note": "0 posts < 7j."}
+  ],
+  "invalid_handles_v3": [
+    "paris.secret", "urbex.france", "paris_capitale",
+    "paris_avant_apres", "chateauxfrancais", "stephanebernofficiel"
   ],
   "posts_per_account": 3,
   "only_posts_newer_than_days": 7,
   "actor": "apify/instagram-scraper",
-  "actor_note": "Avec onlyPostsNewerThan=7j et posts_per_account=3, l'actor reste prévisible : POC v3 a ramené 27 posts sur 5 comptes valides (~$0.06).",
-  "estimated_cost_per_run_usd": 0.06,
-  "estimated_monthly_cost_usd": 1.8
+  "estimated_cost_per_run_usd": 0.15,
+  "estimated_monthly_cost_usd": 4.5,
+  "notes": "Le script charge validated_accounts uniquement (les silent et invalid sont là pour la doc). Pour réactiver les silent : déplacer manuellement dans validated_accounts."
 }
